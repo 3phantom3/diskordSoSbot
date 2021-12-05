@@ -9,7 +9,7 @@ client = discord.Client()
 async def on_message(message):
     if message.author == client.user:
         return
-    msg = ' '.join(message.content.split())
+    msg = message.content.split()
 
     if message.content.startswith('$hello'):
       await message.channel.send('Hello!')
