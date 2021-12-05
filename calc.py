@@ -31,7 +31,7 @@ def calc(msg):
     soft_1500 = 1500 * n2
     SVS = 30 * n2
 
-    return f'''\'\'\'
+    return f'''```
     Calculator - Speedup 
     Speedups:
     
@@ -44,5 +44,5 @@ Total Event Points:
 SOTF 800 points for 1m speedup - {soft_800}
 SOTF 1500 points for 1m speedup - {soft_1500}
 SVS 30 points for 1m speedup - {SVS}
-\'\'\'
+```
     '''
