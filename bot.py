@@ -26,8 +26,8 @@ function "$conf 15-12-2021 15:00" -- set trap time')
         await message.channel.send(calc.calc(msg))
     if message.content.startswitch('$conf'):
         time_input = datetime.datetime.strptime(message.content,'%d-%m-%Y %H:%M')
-        basa[str(message.chanel)] = time_input
-        await message.channel.send(str(message.chanel))
+        basa[str(message.channel.id)] = time_input
+        await message.channel.send(message.channel.id)
 
 async def background_task():
     for i in basa:
