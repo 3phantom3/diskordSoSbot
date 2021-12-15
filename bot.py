@@ -34,7 +34,7 @@ function "$conf 15-12-2021 15:00" -- set trap time')
 #         timesave = datetime.datetime.strptime(basa[i], '%d-%m-%Y %H:%M')
 #         delta = datetime.datetime.utcnow() - timesave
 #         if delta == datetime.timedelta(hours=1):
-#             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+#             await client.get_channel(int(i)).sendgit ('''```🗓NOTIFICATION:
 # Trap is in 1 hour.``` @everyone''')
 #         elif delta == datetime.timedelta(minutes=15):
 #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
