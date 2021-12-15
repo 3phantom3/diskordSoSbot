@@ -32,8 +32,8 @@ def calc(msg):
     SVS = 30 * n2
 
     return f'''```
-    Calculator - Speedup 
-    Speedups:
+Calculator - Speedup 
+Speedups:
     
 {n1}
 
