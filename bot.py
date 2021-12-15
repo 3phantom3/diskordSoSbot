@@ -26,7 +26,7 @@ async def on_message(message):
     if message.content.startswith('$hello'):
       await message.channel.send('Hello!')
     if message.content.startswith('$help'):
-      await message.channel.send('function "$calc 100 1M 100 1H" -- enter after 1 spase /n\
+      await message.channel.send('function "$calc 100 1M 100 1H" -- enter after 1 spase \n\
         function "$conf 15-12-2021 15:00" -- set trap time')
     if message.content.startswith('$calc'):
       await message.channel.send(calc.calc(msg))
@@ -47,16 +47,16 @@ async def background_task():
         timesave = datetime.datetime.strptime(i[1], '%d-%m-%Y %H:%M')
         delta = datetime.datetime.utcnow() - timesave
         if delta == datetime.timedelta(hours=1):
-          await i[0].send('''```🗓NOTIFICATION: 
+          await client.get_channel(i[0]).send('''```🗓NOTIFICATION: 
 Trap is in 1 hour.``` @everyone''')
         elif delta == datetime.timedelta(minutes=15):
-          await i[0].send('''```🗓NOTIFICATION: 
+          await client.get_channel(i[0]).send('''```🗓NOTIFICATION: 
 Trap is in 15 minutes.``` @everyone''')
         elif delta == datetime.timedelta(minutes=5):
-          await i[0].send('''```🗓NOTIFICATION: 
+          await client.get_channel(i[0]).send('''```🗓NOTIFICATION: 
 Trap is in 5 minutes. Recall all your troops``` @everyone''')
         elif delta == 0:
-          await i[0].send('''```🗓NOTIFICATION: 
+          await client.get_channel(i[0]).send('''```🗓NOTIFICATION: 
 It's Trap Time!``` @everyone''')
           timesave += datetime.timedelta(days=2)
           cur.execute("""UPDATE  servertimetrap SET time = ? WHERE channelid = ?""", (timesave, i[0]))
