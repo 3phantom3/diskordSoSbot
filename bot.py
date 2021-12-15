@@ -30,7 +30,7 @@ async def on_message(message):
         function "$conf 15-12-2021 15:00" -- set trap time')
     if message.content.startswith('$calc'):
       await message.channel.send(calc.calc(msg))
-    if message.content.startswitch('$conf'):
+    if message.content.startswith('$conf'):
       cur.execute ("""CREATE TABLE IF NOT EXISTS servertimetrap(channelid INTEGER PRIMARY KEY, time DATETIME);""")
       basa.commit()
       time_input = datetime.datetime.strptime(message.content,'%d-%m-%Y %H:%M')
