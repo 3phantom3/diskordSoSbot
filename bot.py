@@ -21,13 +21,13 @@ async def on_message(message):
         await message.channel.send('Hello!')
     if message.content.startswith('$help'):
         await message.channel.send('function "$calc 100 1M 100 1H" -- enter after 1 spase \n\
-        function "$conf 15-12-2021 15:00" -- set trap time')
+function "$conf 15-12-2021 15:00" -- set trap time')
     if message.content.startswith('$calc'):
         await message.channel.send(calc.calc(msg))
     if message.content.startswitch('$conf'):
         time_input = datetime.datetime.strptime(message.content,'%d-%m-%Y %H:%M')
         basa[str(message.chanel)] = time_input
-        await message.channel.send(basa[str(message.chanel)])
+        await message.channel.send(str(message.chanel))
 
 async def background_task():
     for i in basa:
