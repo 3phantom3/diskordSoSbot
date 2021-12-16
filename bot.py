@@ -36,7 +36,7 @@ async def background_task():
     while True:
         for i in basa:
             time_save = basa[i]
-            time_now = datetime.datetime.utcnow
+            time_now = datetime.datetime.utcnow()
     #         if (time_save.day == time_now.day)and((time_now+datetime.timedelta(hours=1)).hour == time_save.hour)and(time_now.minute== time_save.minute):
     #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     # Trap is in 1 hour.``` @everyone''')
@@ -46,11 +46,11 @@ async def background_task():
     #         elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=5)).minute== time_save.minute):
     #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     # Trap is in 5 minutes. Recall all your troops``` @everyone''')
-            if time_now().minute == time_save.minute:
+            if time_now.minute == time_save.minute:
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
-        await asyncio.sleep(60)
+        await asyncio.sleep(40)
 client.loop.create_task(background_task())
 client.run(my_secret)
