@@ -2,6 +2,7 @@ import discord
 import os
 import calc
 import datetime
+import asyncio
 
 my_secret = os.environ['TOKEN']
 
@@ -30,25 +31,26 @@ function "$conf 15-12-2021 15:00" -- set trap time')
         await message.channel.send(message.channel.id)
         await message.channel.send(time_input.strftime('%d-%m-%Y %H:%M'))
 
-@tasks.loop(seconds=5.0)
 async def background_task():
     await client.wait_until_ready()
-    for i in basa:
-        time_save = datetime.datetime.strptime(basa[i], '%d-%m-%Y %H:%M')
-        delta = datetime.datetime.utcnow() - time_save
-        if delta == datetime.timedelta(hours=1):
-            await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-Trap is in 1 hour.``` @everyone''')
-        elif delta == datetime.timedelta(minutes=15):
-            await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-Trap is in 15 minutes.``` @everyone''')
-        elif delta == datetime.timedelta(minutes=5):
-            await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-Trap is in 5 minutes. Recall all your troops``` @everyone''')
-        elif delta == 0:
-            await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-It's Trap Time!``` @everyone''')
-            time_save += datetime.timedelta(days=2)
-            basa[i] = time_save
+    while True:
+        for i in basa:
+            time_save = datetime.datetime.strptime(basa[i], '%d-%m-%Y %H:%M')
+            delta = datetime.datetime.utcnow() - time_save
+            if delta == datetime.timedelta(hours=1):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 1 hour.``` @everyone''')
+            elif delta == datetime.timedelta(minutes=15):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 15 minutes.``` @everyone''')
+            elif delta == datetime.timedelta(minutes=5):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 5 minutes. Recall all your troops``` @everyone''')
+            elif delta == 0:
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    It's Trap Time!``` @everyone''')
+                time_save += datetime.timedelta(days=2)
+                basa[i] = time_save
+        await asyncio.sleep(60)
 
 client.run(my_secret)
