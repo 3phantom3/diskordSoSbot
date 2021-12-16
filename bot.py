@@ -30,7 +30,9 @@ function "$conf 15-12-2021 15:00" -- set trap time')
         await message.channel.send(message.channel.id)
         await message.channel.send(time_input.strftime('%d-%m-%Y %H:%M'))
 
+@tasks.loop(seconds=5.0)
 async def background_task():
+    await client.wait_until_ready()
     for i in basa:
         time_save = datetime.datetime.strptime(basa[i], '%d-%m-%Y %H:%M')
         delta = datetime.datetime.utcnow() - time_save
@@ -49,5 +51,4 @@ It's Trap Time!``` @everyone''')
             time_save += datetime.timedelta(days=2)
             basa[i] = time_save
 
-client.loop.create_task(background_task())
 client.run(my_secret)
