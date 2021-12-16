@@ -54,7 +54,7 @@ Trap is in 5 minutes. Recall all your troops``` @everyone''')
 It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
-        await asyncio.sleep(40)
+        await asyncio.sleep(60)
 
 
 client.loop.create_task(background_task())
