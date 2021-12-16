@@ -52,5 +52,5 @@ async def background_task():
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
         await asyncio.sleep(60)
-
+client.loop.create_task(background_task())
 client.run(my_secret)
