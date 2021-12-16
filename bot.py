@@ -46,9 +46,9 @@ async def background_task():
     #         elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=5)).minute== time_save.minute):
     #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     # Trap is in 5 minutes. Recall all your troops``` @everyone''')
-            if time_now.minute == time_save.minute:
+            if (time_now.minute == time_save.minute)and(time_now.hour == time_save.hour) and (time_now.day==time_save.day):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    It's Trap Time!``` @everyone''')
+It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
         await asyncio.sleep(40)
