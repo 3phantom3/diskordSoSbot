@@ -26,8 +26,11 @@ function "$conf 15-12-2021 15:00" -- set trap time')
     if message.content.startswith('$calc'):
         await message.channel.send(calc.calc(msg))
     if message.content.startswith('$conf'):
-        time_input = datetime.datetime.strptime(' '.join(message.content.split()[1:]),'%d-%m-%Y %H:%M')
-        basa[str(message.channel.id)] = time_input
+        try:
+            time_input = datetime.datetime.strptime(' '.join(message.content.split()[1:]),'%d-%m-%Y %H:%M')
+            basa[str(message.channel.id)] = time_input
+        except Exception:
+            await message.channel.send('error input')
     if message.content.startswith('$stop'):
         del basa[str(message.channel.id)]
 
