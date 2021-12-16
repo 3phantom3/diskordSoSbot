@@ -28,8 +28,8 @@ function "$conf 15-12-2021 15:00" -- set trap time')
     if message.content.startswith('$conf'):
         time_input = datetime.datetime.strptime(' '.join(message.content.split()[1:]),'%d-%m-%Y %H:%M')
         basa[str(message.channel.id)] = time_input
-        await message.channel.send(message.channel.id)
-        await message.channel.send(time_input.strftime('%d-%m-%Y %H:%M'))
+    if message.content.startswith('$stop'):
+        del basa[str(message.channel.id)]
 
 async def background_task():
     await client.wait_until_ready()
@@ -39,19 +39,20 @@ async def background_task():
             time_now = datetime.datetime.utcnow()
             if (time_save.day == time_now.day)and((time_now+datetime.timedelta(hours=1)).hour == time_save.hour)and(time_now.minute== time_save.minute):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    Trap is in 1 hour.``` @everyone''')
+Trap is in 1 hour.``` @everyone''')
             elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=15)).minute== time_save.minute):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    Trap is in 15 minutes.``` @everyone''')
+Trap is in 15 minutes.``` @everyone''')
             elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=5)).minute== time_save.minute):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    Trap is in 5 minutes. Recall all your troops``` @everyone''')
+Trap is in 5 minutes. Recall all your troops``` @everyone''')
             elif (time_now.minute == time_save.minute)and(time_now.hour == time_save.hour) and (time_now.day==time_save.day):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
 It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
-                await client.get_channel(int(i)).send(basa[i].strftime('%d-%m-%Y %H:%M'))
         await asyncio.sleep(40)
+
+
 client.loop.create_task(background_task())
 client.run(my_secret)
