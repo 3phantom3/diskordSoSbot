@@ -37,6 +37,7 @@ async def background_task():
         for i in basa:
             time_save = datetime.datetime.strptime(basa[i], '%d-%m-%Y %H:%M')
             delta = datetime.datetime.utcnow() - time_save
+            await client.get_channel(int(i)).send('work task')
             if delta == datetime.timedelta(hours=1):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     Trap is in 1 hour.``` @everyone''')
