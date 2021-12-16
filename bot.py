@@ -46,11 +46,11 @@ async def background_task():
             elif delta == datetime.timedelta(minutes=5):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     Trap is in 5 minutes. Recall all your troops``` @everyone''')
-            elif delta == 0:
+            elif delta == datetime.timedelta(0):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
     It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
-        await asyncio.sleep(10)
+        await asyncio.sleep(1)
 client.loop.create_task(background_task())
 client.run(my_secret)
