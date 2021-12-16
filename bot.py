@@ -37,20 +37,21 @@ async def background_task():
         for i in basa:
             time_save = basa[i]
             time_now = datetime.datetime.utcnow()
-    #         if (time_save.day == time_now.day)and((time_now+datetime.timedelta(hours=1)).hour == time_save.hour)and(time_now.minute== time_save.minute):
-    #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    # Trap is in 1 hour.``` @everyone''')
-    #         elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=15)).minute== time_save.minute):
-    #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    # Trap is in 15 minutes.``` @everyone''')
-    #         elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=5)).minute== time_save.minute):
-    #             await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
-    # Trap is in 5 minutes. Recall all your troops``` @everyone''')
-            if (time_now.minute == time_save.minute)and(time_now.hour == time_save.hour) and (time_now.day==time_save.day):
+            if (time_save.day == time_now.day)and((time_now+datetime.timedelta(hours=1)).hour == time_save.hour)and(time_now.minute== time_save.minute):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 1 hour.``` @everyone''')
+            elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=15)).minute== time_save.minute):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 15 minutes.``` @everyone''')
+            elif (time_save.day == time_now.day)and(time_now == time_save.hour)and((time_now+datetime.timedelta(minutes=5)).minute== time_save.minute):
+                await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
+    Trap is in 5 minutes. Recall all your troops``` @everyone''')
+            elif (time_now.minute == time_save.minute)and(time_now.hour == time_save.hour) and (time_now.day==time_save.day):
                 await client.get_channel(int(i)).send('''```🗓NOTIFICATION:
 It's Trap Time!``` @everyone''')
                 time_save += datetime.timedelta(days=2)
                 basa[i] = time_save
+                await client.get_channel(int(i)).send(basa[i].strftime('%d-%m-%Y %H:%M'))
         await asyncio.sleep(40)
 client.loop.create_task(background_task())
 client.run(my_secret)
